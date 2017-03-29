@@ -102,7 +102,7 @@ const handleReinstatements = (centre, tester) => {
   return centre;
 };
 
-const populateOOC = (centre) =>
+const oldPopulateOOC = (centre) =>
   BedEvent.getOOCByCentreGroupByGenderAndReason(centre.id)
     .then((oocBeds) =>
       _.assign(centre, {outOfCommission: oocBeds})
@@ -120,7 +120,7 @@ const populateContingency = (centre) =>
       _.assign(centre, {contingency: contingency})
     );
 
-const experimentalOOC = (centre) => {
+const populateOOC = (centre) => {
   if (!BedEvent.query) {
     return;
   }
@@ -191,8 +191,8 @@ module.exports = {
       .then(() => handleReinstatements(centre, reinstatementReconciler))
       .then(() => reconcileEvents(centre, reconciler))
       .then(() => filterUnreconciled(centre, visibilityRange))
+      .then(() => oldPopulateOOC(centre))
       .then(() => populateOOC(centre))
-      .then(() => experimentalOOC(centre))
       .then(() => populatePrebooking(centre))
       .then(() => populateContingency(centre))
       .return(centre);

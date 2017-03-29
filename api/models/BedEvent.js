@@ -58,15 +58,16 @@ const model = {
     }
   },
 
-  getOOCByCentreGroupByGenderAndReason: (centreId) =>
-    BedEvent.getCurrentOOCByCentre(centreId)
-      .then(BedEvent.groupByGender)
-      .then(BedEvent.groupAndCountByReason)
-      .then(BedEvent.fillInBlanks),
+  getOOCByCentreGroupByGenderAndReason: (centreId) => {
+    // BedEvent.getCurrentOOCByCentre(centreId)
+    //   .then(BedEvent.groupByGender)
+    //   .then(BedEvent.groupAndCountByReason),
+      // .then
+      // (BedEvent.fillInBlanks),
 
-  fillInBlanks: (inp) => {
+  // fillInBlanks: (inp) => {
     var defaults = _.mapValues(_.invert(reasons), () => 0);
-    return _.defaultsDeep(inp, {
+    return Promise.resolve({
       male: defaults,
       female: defaults
     });
@@ -78,20 +79,21 @@ const model = {
    * do populates with where clauses in the same way that sails-memory does, hence the
    * requirement to filter event.bed.centre === centreId post populate with where
    */
-  getCurrentOOCByCentre: (centreId) =>
-    BedEvent.find({
-      where: {
-        active: true,
-        operation: operations.OPERATION_OUT_OF_COMMISSION
-      }
-    })
-      .populate('bed', {
-        where: {
-          centre: centreId
-        }, select: ['gender', 'centre']
-      })
-      .toPromise()
-      .filter((event) => !_.isEmpty(event.bed) && event.bed.centre === centreId),
+  // getCurrentOOCByCentre: (centreId) =>
+  //   BedEvent.find({
+  //     where: {
+  //       active: true,
+  //       operation: operations.OPERATION_OUT_OF_COMMISSION
+  //     }
+  //   })
+  //     .populate('bed', {
+  //       where: {
+  //         centre: centreId
+  //       }, select: ['gender', 'centre']
+  //     })
+  //     .toPromise()
+  //     .filter((event) => !_.isEmpty(event.bed) && event.bed.centre === centreId),
+
 
   groupByGender: (events) =>
     _.groupBy(events, (e) => e.bed.gender),

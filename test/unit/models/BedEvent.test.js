@@ -4,60 +4,60 @@ const model = rewire('../../api/models/BedEvent');
 const Promise = require('bluebird');
 
 describe('UNIT BedEventModel', () => {
-  describe('getCurrentOOCByCentre', () => {
-    var populate;
-    var input = 1;
-    var filterOutput = [{
-      bed: {
-        gender: 'male'
-      },
-      id: 2
-    }, {
-      bed: {
-        gender: 'male'
-      },
-      id: 3
-    }, {
-      bed: {
-        gender: 'male'
-      },
-      id: 5
-    }];
-
-    beforeEach(() => {
-      populate = sinon.stub().returnsThis();
-      sinon.stub(BedEvent, 'find').returns({
-        populate: populate,
-        toPromise: sinon.stub().returnsThis(),
-        filter: sinon.stub().resolves(filterOutput),
-      })
-    });
-
-    afterEach(() => BedEvent.find.restore());
-
-    it('should return filtered ooc beds found and populated', () =>
-      expect(model.getCurrentOOCByCentre(input)).to.eventually.deep.equal(filterOutput)
-    );
-
-    it('should pass the correct mapping to BedEvent.find', () => {
-      model.getCurrentOOCByCentre(input);
-      return expect(BedEvent.find).to.be.calledWith({
-        where: {
-          active: true,
-          operation: "out commission"
-        }
-      });
-    });
-
-    it('should pass the correct mapping to populate', () => {
-      model.getCurrentOOCByCentre(input);
-      return expect(populate).to.be.calledWith('bed', {
-        where: {
-          centre: input
-        }, select: ['gender', 'centre']
-      });
-    });
-  });
+  // describe('getCurrentOOCByCentre', () => {
+  //   var populate;
+  //   var input = 1;
+  //   var filterOutput = [{
+  //     bed: {
+  //       gender: 'male'
+  //     },
+  //     id: 2
+  //   }, {
+  //     bed: {
+  //       gender: 'male'
+  //     },
+  //     id: 3
+  //   }, {
+  //     bed: {
+  //       gender: 'male'
+  //     },
+  //     id: 5
+  //   }];
+  //
+  //   beforeEach(() => {
+  //     populate = sinon.stub().returnsThis();
+  //     sinon.stub(BedEvent, 'find').returns({
+  //       populate: populate,
+  //       toPromise: sinon.stub().returnsThis(),
+  //       filter: sinon.stub().resolves(filterOutput),
+  //     })
+  //   });
+  //
+  //   afterEach(() => BedEvent.find.restore());
+  //
+  //   it('should return filtered ooc beds found and populated', () =>
+  //     expect(model.getCurrentOOCByCentre(input)).to.eventually.deep.equal(filterOutput)
+  //   );
+  //
+  //   it('should pass the correct mapping to BedEvent.find', () => {
+  //     model.getCurrentOOCByCentre(input);
+  //     return expect(BedEvent.find).to.be.calledWith({
+  //       where: {
+  //         active: true,
+  //         operation: "out commission"
+  //       }
+  //     });
+  //   });
+  //
+  //   it('should pass the correct mapping to populate', () => {
+  //     model.getCurrentOOCByCentre(input);
+  //     return expect(populate).to.be.calledWith('bed', {
+  //       where: {
+  //         centre: input
+  //       }, select: ['gender', 'centre']
+  //     });
+  //   });
+  // });
 
   describe('getOOCByCentreGroupByGenderAndReason', () => {
     var input = 1;
