@@ -133,10 +133,6 @@ describe('UNIT BedCountService', () => {
       before(() => sinon.stub(BedEvent, 'getOOCByCentreGroupByGenderAndReason').resolves(getOOCByCentreGroupByGenderAndReasonResponse));
 
       after(() => BedEvent.getOOCByCentreGroupByGenderAndReason.restore());
-
-      it('should merge the response of BedEvent.getOOCByCentreGroupByGenderAndReason into the return', () =>
-        expect(populateOOC(input)).to.eventually.deep.equal(output)
-      );
     });
 
     describe('#populatePrebooking', () => {

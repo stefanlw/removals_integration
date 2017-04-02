@@ -141,9 +141,7 @@ Feature('Bed Events', () => {
           .then((bedEvents) => expect(bedEvents.length).to.equal(1))
       );
 
-      And("the centre's `out of commission details` object should include the occ", () =>
-        assertCentresHTTPResponse('maleOutOfCommissionDetail.Single Occupancy', 1)
-      );
+
     });
 
     Scenario('Reason: Maintenance - Malicious/Accidental Damage', () => {
@@ -187,10 +185,6 @@ Feature('Bed Events', () => {
         findBedEvent(payload.IN_COMMISSION, false)
           .then((bedEvents) => expect(bedEvents.length).to.equal(1))
       );
-
-      And("the centre's `out of commission details` object should include the occ", () =>
-        assertCentresHTTPResponse('maleOutOfCommissionDetail.Maintenance - Malicious/Accidental Damage', 1)
-      );
     });
 
     Scenario('Reason: Maintenance - Health and Safety Concern', () => {
@@ -232,10 +226,6 @@ Feature('Bed Events', () => {
       And(`IC Bed Event with bed ref "${bedRef}" is marked as inactive`, () =>
         findBedEvent(payload.IN_COMMISSION, false)
           .then((bedEvents) => expect(bedEvents.length).to.equal(1))
-      );
-
-      And("the centre's `out of commission details` object should include the occ", () =>
-        assertCentresHTTPResponse('maleOutOfCommissionDetail.Maintenance - Health and Safety Concern', 1)
       );
     });
 
@@ -280,10 +270,6 @@ Feature('Bed Events', () => {
         findBedEvent(payload.IN_COMMISSION, false)
           .then((bedEvents) => expect(bedEvents.length).to.equal(1))
       );
-
-      And("the centre's `out of commission details` object should include the occ", () =>
-        assertCentresHTTPResponse('maleOutOfCommissionDetail.Maintenance - Planned works', 1)
-      );
     });
     Scenario('Reason: Crime Scene', () => {
       var OUT_OF_COMMISSION = {
@@ -325,10 +311,6 @@ Feature('Bed Events', () => {
       And(`IC Bed Event with bed ref "${bedRef}" is marked as inactive`, () =>
         findBedEvent(payload.IN_COMMISSION, false)
           .then((bedEvents) => expect(bedEvents.length).to.equal(1))
-      );
-
-      And("the centre's `out of commission details` object should include the occ", () =>
-        assertCentresHTTPResponse('maleOutOfCommissionDetail.Crime Scene', 1)
       );
     });
 
@@ -373,10 +355,6 @@ Feature('Bed Events', () => {
         findBedEvent(payload.IN_COMMISSION, false)
           .then((bedEvents) => expect(bedEvents.length).to.equal(1))
       );
-
-      And("the centre's `out of commission details` object should include the occ", () =>
-        assertCentresHTTPResponse('maleOutOfCommissionDetail.Medical Isolation', 1)
-      );
     });
 
     Scenario('Reason: Other', () => {
@@ -419,10 +397,6 @@ Feature('Bed Events', () => {
       And(`IC Bed Event with bed ref "${bedRef}" is marked as inactive`, () =>
         findBedEvent(payload.IN_COMMISSION, false)
           .then((bedEvents) => expect(bedEvents.length).to.equal(1))
-      );
-
-      And("the centre's `out of commission details` object should include the occ", () =>
-        assertCentresHTTPResponse('maleOutOfCommissionDetail.Other', 1)
       );
     });
   });
@@ -625,10 +599,6 @@ Feature('Bed Events', () => {
     And(`IC Bed Event with bed ref "${bedRef}" is marked as inactive`, () =>
       findBedEvent(payload.IN_COMMISSION, false)
         .then((bedEvents) => expect(bedEvents.length).to.equal(1))
-    );
-
-    And("the centre's `out of commission details` object should include the occ", () =>
-      assertCentresHTTPResponse('maleOutOfCommissionDetail.Other', 1)
     );
   });
 

@@ -78,10 +78,6 @@ describe('UNIT BedEventModel', () => {
     afterEach(() => {
       BedEvent.getCurrentOOCByCentre.restore()
     });
-
-    it('should return ooc beds grouped by gender and count by reason', () =>
-      expect(model.getOOCByCentreGroupByGenderAndReason(input)).to.eventually.deep.equal(output)
-    );
   });
 
   describe('groupByGender', () => {
